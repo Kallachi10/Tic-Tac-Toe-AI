@@ -82,7 +82,7 @@ int minimax(int depth,struct board s[3][3],bool isMaximizing,int lastX,int lastY
             s[m][n].c = '\0';
             s[m][n].p = 0;
             if(isMaximizing){
-                if(score>=bestScore){
+                if(score>bestScore){
                     bestScore = score;
                     bestMove.x = moves[i].x;
                     bestMove.y = moves[i].y;
@@ -90,7 +90,7 @@ int minimax(int depth,struct board s[3][3],bool isMaximizing,int lastX,int lastY
             }
                 
             else{
-                if(score<=bestScore){
+                if(score<bestScore){
                     bestScore = score;
                     bestMove.x = moves[i].x;
                     bestMove.y = moves[i].y;
