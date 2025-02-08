@@ -3,6 +3,7 @@
 #include<stdio.h>
 #include<stdbool.h>
 int flag = 0;
+int init_depth;
 struct board{
     char c;
     int p;
@@ -42,6 +43,7 @@ int moveGen(struct board s[3][3],struct move* moves){
 int minimax(int depth,struct board s[3][3],bool isMaximizing,int lastX,int lastY){
     //generate legal moves first
     struct move moves[10];
+    int initDepth;
     int size = moveGen(s,moves);
     int bestScore;
     int result;
@@ -57,8 +59,10 @@ int minimax(int depth,struct board s[3][3],bool isMaximizing,int lastX,int lastY
         else
             return 0;
     }
-    if(flag==0)
+    if(flag==0){
         flag = 1;
+        
+    }
 
     if(isMaximizing)
         bestScore = -1000;
@@ -84,17 +88,18 @@ int minimax(int depth,struct board s[3][3],bool isMaximizing,int lastX,int lastY
             if(isMaximizing){
                 if(score>bestScore){
                     bestScore = score;
-                    bestMove.x = moves[i].x;
-                    bestMove.y = moves[i].y;
+                    if(depth == init_depth){
+                        bestMove = moves[i];
+                    }
                 }
             }
                 
             else{
                 if(score<bestScore){
                     bestScore = score;
-                    bestMove.x = moves[i].x;
-                    bestMove.y = moves[i].y;
-                }
+                    if(depth == init_depth){
+                        bestMove = moves[i];
+                    }}
             }
         }
     
@@ -167,8 +172,9 @@ void main(){
         }
         else{
             printf("\n\n%d",bestMove.x);
-            int score = minimax(depth-count,s,false,-1,-1);
-            printf("\n%d",score);
+            init_depth = depth-count;
+            int score = minimax(init_depth,s,false,-1,-1);
+            printf("\nscore : %d",score);
             r = bestMove.x;
             c = bestMove.y;
             s[r][c].c='O';
