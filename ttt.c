@@ -170,7 +170,7 @@ void main(){
                 continue;
             }
             if(s[r][c].p!=0){
-                printf("please Choose an empty cell");
+                printf("please Choose an empty cell\n");
                 continue;
             }
             s[r][c].c='X';
