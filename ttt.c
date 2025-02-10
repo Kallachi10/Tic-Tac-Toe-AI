@@ -162,8 +162,13 @@ void main(){
     int r,c,count=0,k=0,depth = 9;
     while(1){
         if(count%2==0){
-            printf("enter position");
-            scanf("%d%d",&r,&c);
+            printf("enter position(row <space> column): ");
+            scanf("%d %d",&r,&c);
+            if(!((r>=0&&r<3)&&(c>=0&&c<3))){
+                printf("Please Enter a valid position(range: 0,1,2)\n");
+                while(getchar()!='\n');
+                continue;
+            }
             s[r][c].c='X';
             count++;
             s[r][c].p=1;
