@@ -169,6 +169,10 @@ void main(){
                 while(getchar()!='\n');
                 continue;
             }
+            if(s[r][c].p!=0){
+                printf("please Choose an empty cell");
+                continue;
+            }
             s[r][c].c='X';
             count++;
             s[r][c].p=1;
